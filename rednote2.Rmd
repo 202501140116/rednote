@@ -1,0 +1,140 @@
+---
+title: "rednote"
+author: "Mengling Xu"
+date: "2025-04-18"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(dplyr)
+library(readr)
+library(ggplot2)
+library(knitr)
+library(psych)
+
+options(scipen = 999)
+
+time_levels <- c(
+  "Less than 30 minutes 30分钟以内",
+  "30 min – 1 hour 30分钟-1小时",
+  "1–2 hours 1-2小时",
+  "More than 2 hours 2小时以上"                             
+)
+
+likert_levels <- c(
+  "Strongly disagree 非常不同意", 
+  "Disagree 不同意", 
+  "Neutral 中立", 
+  "Agree 同意", 
+  "Strongly agree 非常同意"
+)                                
+
+explore_factors <- read_csv(
+  '../data/rednote_factors.csv',
+  col_types = cols(
+    Time = col_factor(ordered = TRUE, levels = time_levels),
+    S1 = col_factor(ordered = TRUE, levels = likert_levels),
+    S2 = col_factor(ordered = TRUE, levels = likert_levels),
+    S3 = col_factor(ordered = TRUE, levels = likert_levels),
+    S4 = col_factor(ordered = TRUE, levels = likert_levels),
+    S5 = col_factor(ordered = TRUE, levels = likert_levels),
+    T1 = col_factor(ordered = TRUE, levels = likert_levels),
+    T2 = col_factor(ordered = TRUE, levels = likert_levels),
+    T3 = col_factor(ordered = TRUE, levels = likert_levels),
+    T4 = col_factor(ordered = TRUE, levels = likert_levels),
+    C1 = col_factor(ordered = TRUE, levels = likert_levels),
+    C2 = col_factor(ordered = TRUE, levels = likert_levels),
+    C3 = col_factor(ordered = TRUE, levels = likert_levels),
+    C4 = col_factor(ordered = TRUE, levels = likert_levels),
+    C5 = col_factor(ordered = TRUE, levels = likert_levels)
+  )
+)
+
+explore_factors <- explore_factors %>%
+  mutate(
+    across(
+      .cols = c("Time", paste0("S", 1:5), paste0("T", 1:4), paste0("C", 1:5)),
+      .fns = as.numeric,
+      .names = '{.col}_coded'
+    )
+  )
+
+keys_list <- list(
+  search_information = c(
+    'S1_coded',
+    'S2_coded',
+    'S3_coded',
+    'S4_coded',
+    'S5_coded'
+  ),
+  talk_interaction = c(
+    'T1_coded',
+    'T2_coded',
+    'T3_coded',
+    'T4_coded'
+  ),
+  community_belongings = c(
+    'C1_coded',
+    'C2_coded',
+    'C3_coded',
+    'C4_coded',
+    'C5_coded'
+  )
+)
+
+explore_factors_scores <- scoreItems(
+  keys = keys_list,
+  items = explore_factors,
+  totals = FALSE,
+  missing = TRUE,
+  impute = 'none'
+)
+
+explore_factors <- cbind(explore_factors, explore_factors_scores$scores)
+
+print(explore_factors_scores)
+```
+
+
+
+```{r Time_coded-search_information-correlation}
+explore_factors %>%
+   cor.test(
+   ~  Time_coded + search_information,
+    data= . ,
+    method = 'spearman',
+    exact = FALSE
+    
+  )
+```
+“使用时长（Time_coded）与信息搜索动机（search_information）之间没有显著的相关性。”
+（Spearman’s rho = 0.086，p = 0.38 > 0.05）
+
+
+```{r Time_coded-talk_interaction-correlation}
+explore_factors %>%
+   cor.test(
+   ~  Time_coded + talk_interaction,
+    data= . ,
+    method = 'spearman',
+    exact = FALSE
+    
+  )
+```
+在 Spearman 等级相关分析中，Time_coded 与 talk_interaction 之间的相关系数为 ρ = 0.069，p = 0.476，不具有统计学显著性。这表明二者之间不存在显著的单调相关关系。
+
+```{r Time_coded-community_belongings-correlation}
+explore_factors %>%
+   cor.test(
+   ~  Time_coded + community_belongings,
+    data= . ,
+    method = 'spearman',
+    exact = FALSE
+    
+  )
+```
+使用时长与社区归属感之间存在弱正相关（ρ = 0.151），但该相关性不具有统计学显著性（p = 0.119），因此不能得出两者之间存在显著关联的结论。
+
+
