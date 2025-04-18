@@ -98,6 +98,41 @@ print(explore_factors_scores)
 ```
 
 
+# TIme 
+```{r visualise- Time}
+explore_factors %>%
+  ggplot(
+    aes(x = Time)
+  ) +
+  geom_bar()
+```
+
+# search_Information 
+```{r visualise-search_information}
+explore_factors %>%
+  ggplot(
+    aes(x = search_information)
+  ) +
+  geom_histogram(binwidth = 1)
+```
+
+```{r visualise-talk_interaction}
+explore_factors %>%
+  ggplot(
+    aes(x = talk_interaction)
+  ) +
+  geom_histogram(binwidth = 1)
+```
+```{r visualise-community_belongings}
+explore_factors %>%
+  ggplot(
+    aes(x = community_belongings)
+  ) +
+  geom_histogram(binwidth = 1)
+```
+
+
+# hypothesis: Information search satisfaction will be positively related to the usage duration of Xiaohongshu.
 
 ```{r Time_coded-search_information-correlation}
 explore_factors %>%
@@ -113,6 +148,77 @@ explore_factors %>%
 （Spearman’s rho = 0.086，p = 0.38 > 0.05）
 
 
+```{r Time_coded-S1-correlation}
+explore_factors %>%
+   cor.test(
+   ~  Time_coded + S1_coded,
+    data= . ,
+    method = 'spearman',
+    exact = FALSE
+    
+  )
+```
+“使用时长（Time_coded）与S1之间没有显著的相关性。”
+（Spearman’s rho = 0.206，p = 0.32 > 0.05）
+
+
+```{r Time_coded-S2-correlation}
+explore_factors %>%
+   cor.test(
+   ~  Time_coded + S2_coded,
+    data= . ,
+    method = 'spearman',
+    exact = FALSE
+    
+  )
+```
+“使用时长（Time_coded）与S2之间没有显著的相关性。”
+（Spearman’s rho = 0.079，p = 0.42 > 0.05）
+
+```{r Time_coded-S3-correlation}
+explore_factors %>%
+   cor.test(
+   ~  Time_coded + S3_coded,
+    data= . ,
+    method = 'spearman',
+    exact = FALSE
+    
+  )
+```
+“使用时长（Time_coded）与S3之间没有显著的相关性。”
+（Spearman’s rho = -0.000，p = 1 > 0.05）
+
+
+```{r Time_coded-S4-correlation}
+explore_factors %>%
+   cor.test(
+   ~  Time_coded + S4_coded,
+    data= . ,
+    method = 'spearman',
+    exact = FALSE
+    
+  )
+```
+“使用时长（Time_coded）与S4之间没有显著的相关性。”
+（Spearman’s rho = -0.088，p = 0.37 > 0.05）
+
+```{r Time_coded-S5-correlation}
+explore_factors %>%
+   cor.test(
+   ~  Time_coded + S5_coded,
+    data= . ,
+    method = 'spearman',
+    exact = FALSE
+    
+  )
+```
+“使用时长（Time_coded）与S5之间没有显著的相关性。”
+（Spearman’s rho = -0.085，p = 0.38 > 0.05）
+
+
+
+#H2: Comment section atmosphere satisfaction will be positively related to the usage duration of Xiaohongshu.
+
 ```{r Time_coded-talk_interaction-correlation}
 explore_factors %>%
    cor.test(
@@ -124,6 +230,61 @@ explore_factors %>%
   )
 ```
 在 Spearman 等级相关分析中，Time_coded 与 talk_interaction 之间的相关系数为 ρ = 0.069，p = 0.476，不具有统计学显著性。这表明二者之间不存在显著的单调相关关系。
+
+```{r Time_coded-T1-correlation}
+explore_factors %>%
+   cor.test(
+   ~  Time_coded + T1_coded,
+    data= . ,
+    method = 'spearman',
+    exact = FALSE
+    
+  )
+```
+“使用时长（Time_coded）与T1之间没有显著的相关性。”
+（Spearman’s rho = 0.074，p = 0.45 > 0.05）
+
+```{r Time_coded-T2-correlation}
+explore_factors %>%
+   cor.test(
+   ~  Time_coded + T2_coded,
+    data= . ,
+    method = 'spearman',
+    exact = FALSE
+    
+  )
+```
+“使用时长（Time_coded）与T2之间没有显著的相关性。”
+（Spearman’s rho = 0.079，p = 0.42 > 0.05）
+
+
+```{r Time_coded-T3-correlation}
+explore_factors %>%
+   cor.test(
+   ~  Time_coded + T3_coded,
+    data= . ,
+    method = 'spearman',
+    exact = FALSE
+    
+  )
+```
+“使用时长（Time_coded）与T3之间没有显著的相关性。”
+（Spearman’s rho = 0.028，p = 0.77 > 0.05）
+
+```{r Time_coded-T4-correlation}
+explore_factors %>%
+   cor.test(
+   ~  Time_coded + T4_coded,
+    data= . ,
+    method = 'spearman',
+    exact = FALSE
+    
+  )
+```
+“使用时长（Time_coded）与T3之间没有显著的相关性。”
+（Spearman’s rho = -0.013，p = 0.89 > 0.05）
+
+#H3: Community belonging will be positively related to the usage duration of Xiaohongshu.
 
 ```{r Time_coded-community_belongings-correlation}
 explore_factors %>%
@@ -137,4 +298,69 @@ explore_factors %>%
 ```
 使用时长与社区归属感之间存在弱正相关（ρ = 0.151），但该相关性不具有统计学显著性（p = 0.119），因此不能得出两者之间存在显著关联的结论。
 
+```{r Time_coded-C1-correlation}
+explore_factors %>%
+   cor.test(
+   ~  Time_coded + C1_coded,
+    data= . ,
+    method = 'spearman',
+    exact = FALSE
+    
+  )
+```
 
+“使用时长（Time_coded）与C1之间没有显著的相关性。”
+（Spearman’s rho = 0.2，p =0.08> 0.05）
+
+```{r Time_coded-C2-correlation}
+explore_factors %>%
+   cor.test(
+   ~  Time_coded + C2_coded,
+    data= . ,
+    method = 'spearman',
+    exact = FALSE
+    
+  )
+```
+“使用时长（Time_coded）与C2之间没有显著的相关性。”
+（Spearman’s rho = 0.085，p =0.38> 0.05）
+
+```{r Time_coded-C3-correlation}
+explore_factors %>%
+   cor.test(
+   ~  Time_coded + C3_coded,
+    data= . ,
+    method = 'spearman',
+    exact = FALSE
+    
+  )
+```
+“使用时长（Time_coded）与C2之间没有显著的相关性。”
+（Spearman’s rho = 0.108，p =0.27> 0.05）
+
+```{r Time_coded-C4-correlation}
+explore_factors %>%
+   cor.test(
+   ~  Time_coded + C4_coded,
+    data= . ,
+    method = 'spearman',
+    exact = FALSE
+    
+  )
+```
+“使用时长（Time_coded）与C3之间没有显著的相关性。”
+（Spearman’s rho = 0.01，p =0.32> 0.05）
+
+
+```{r Time_coded-C5-correlation}
+explore_factors %>%
+   cor.test(
+   ~  Time_coded + C5_coded,
+    data= . ,
+    method = 'spearman',
+    exact = FALSE
+    
+  )
+```
+“使用时长（Time_coded）与C5之间没有显著的相关性。”
+（Spearman’s rho = 0.08，p =0.39> 0.05）
