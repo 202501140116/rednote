@@ -98,7 +98,7 @@ print(explore_factors_scores)
 ```
 
 
-# TIme 
+# Time 
 ```{r visualise- Time}
 explore_factors %>%
   ggplot(
@@ -229,7 +229,7 @@ explore_factors %>%
     
   )
 ```
-在 Spearman 等级相关分析中，Time_coded 与 talk_interaction 之间的相关系数为 ρ = 0.069，p = 0.476，不具有统计学显著性。这表明二者之间不存在显著的单调相关关系。
+在 Spearman 等级相关分析中，Time_coded 与 talk_interaction 之间的相关系数为 r = 0.069，p = 0.476，不具有统计学显著性。这表明二者之间不存在显著的单调相关关系。
 
 ```{r Time_coded-T1-correlation}
 explore_factors %>%
